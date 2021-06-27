@@ -13,7 +13,7 @@
 #include "cpu/base.hh"
 #include "params/VirtualDevice.hh"
 
-#include "./SimpleCNN/ai_chip.h"
+#include "./RRAM/ai_chip.h"
 
 class VirtualDevice : public MemObject
 {
@@ -22,14 +22,13 @@ protected:
     uint32_t id;
 
 private:
-
     class DevicePort : public SlavePort
     {
     private:
-        VirtualDevice* vdev;
+        VirtualDevice *vdev;
 
     public:
-        DevicePort(const std::string& _name, VirtualDevice* _vdev);
+        DevicePort(const std::string &_name, VirtualDevice *_vdev);
 
     protected:
         Tick recvAtomic(PacketPtr pkt);
@@ -37,13 +36,11 @@ private:
         bool recvTimingReq(PacketPtr pkt);
         void recvRespRetry();
         AddrRangeList getAddrRanges() const;
-
     };
 
     DevicePort port;
 
 public:
-
     typedef VirtualDeviceParams Params;
     const Params *params() const
     {
@@ -57,7 +54,7 @@ public:
     static const uint8_t VDEV_SET = 0x01;
     static const uint8_t VDEV_WORK = 0x02;
     static const uint8_t VDEV_READY = 0x04;
-    static const uint8_t VDEV_FINISH = 0x08;   
+    static const uint8_t VDEV_FINISH = 0x08;
 
     /** Method to trigger an interrupt after task finishes. */
     void triggerInterrupt();
@@ -68,7 +65,7 @@ public:
     /** Handle energy state changes. */
     virtual int handleMsg(const EnergyMsg &msg);
     /** Method for python scripts to get port. */
-    BaseSlavePort& getSlavePort(const std::string& if_name,
+    BaseSlavePort &getSlavePort(const std::string &if_name,
                                 PortID idx = InvalidPortID);
     /** Method to get addr range. */
     AddrRange getAddrRange() const;
@@ -80,13 +77,15 @@ public:
     void recvRespRetry();
 
     /** State related parameters **/
-    enum State {
+    enum State
+    {
         STATE_POWEROFF = 0,
         STATE_IDLE = 1,
         STATE_ACTIVE = 2
     };
 
     int access_time = 0;
+
 protected:
     /*AI chip unit*/
     AIChip aichip;
@@ -111,7 +110,7 @@ protected:
      * |-high-----------------------low-|
      * |-4 bits-|finish|ready|work|set| */
     uint8_t pmem = VDEV_READY | VDEV_FINISH;
-    
+
     double data_bandwidth;
 };
 

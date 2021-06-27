@@ -1,9 +1,9 @@
 Import('*')
 
-Source('./SimpleCNN/ai_chip.cpp')
-Source('./SimpleCNN/core.cpp')
-Source('./SimpleCNN/memhub.cpp')
-Source('./SimpleCNN/memory.cpp')
+Source('./RRAM/ai_chip.cpp')
+Source('./RRAM/core.cpp')
+Source('./RRAM/memhub.cpp')
+Source('./RRAM/memory.cpp')
 Source('vdev.cc')
 SimObject('VirtualDevice.py')
 

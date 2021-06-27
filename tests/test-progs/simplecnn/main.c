@@ -7,7 +7,6 @@
 #include "../../../util/m5/m5op.h"
 
 #include "peripheral.h"
-#include "rram_array.h"
 #include "output_label.h"
 
 #define BATCH 300
@@ -258,6 +257,7 @@ int main()
 	uint8_t finalresult[TOTAL_NUM];
 	int count;
 	uint8_t j;
+	periInit(data, 1);
 	for (count = 0; count < BATCH; count++)
 	{
 		int8_t temp_int8[1024];
@@ -270,7 +270,7 @@ int main()
 		}
 		periWrite(data, 2 + 1024 * 1024, temp_int8, sizeof(temp_int8));
 
-		for (j = 1; j <= 10; j++)
+		for (j = 2; j <= 8; j++)
 		{
 			periInit(data, j);
 		}
