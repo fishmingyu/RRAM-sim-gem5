@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstring>
 #include <cmath>
-#define NOISEMAX 25
+#define NOISEMAX 1
 #define LARGE 1000000
 
 class RRAM_Array

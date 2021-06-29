@@ -49,7 +49,7 @@ system.vdev1.s_energy_port = system.energy_mgmt.m_energy_port
 system.vdev1.data_bandwidth = 10000  #bandwidth, ticks per byte # 10000 = 100MB/s
 
 process = LiveProcess()
-process.cmd = ['tests/test-progs/simplecnn/main']
+process.cmd = ['tests/test-progs/simplemlp/main']
 system.cpu.workload = process
 system.cpu.createThreads()
 
